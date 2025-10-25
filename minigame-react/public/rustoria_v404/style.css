@@ -1,0 +1,511 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
+    color-scheme: dark;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.app {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    max-width: 90vw;
+    padding: 24px;
+    border-radius: 12px;
+    background: rgba(12, 18, 28, 0.92);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+    color: #f1f5f9;
+}
+
+.hidden {
+    display: none;
+}
+
+h1 {
+    font-size: 20px;
+    margin: 0 0 16px;
+    text-align: center;
+}
+
+p.description {
+    font-size: 15px;
+    margin: 0 0 16px;
+    text-align: center;
+    color: #cbd5f5;
+}
+
+.progress-bar {
+    position: relative;
+    width: 100%;
+    height: 16px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.progress-bar .fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+    transition: width 0.1s ease-out;
+}
+
+.key-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    justify-items: center;
+}
+
+.key {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.key.active {
+    background: rgba(56, 189, 248, 0.3);
+    transform: translateY(-4px);
+}
+
+.sequence {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    letter-spacing: 6px;
+}
+
+.feedback {
+    text-align: center;
+    font-size: 16px;
+    color: #f87171;
+    min-height: 20px;
+}
+
+.instructions {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+    color: #9ca3af;
+}
+
+.shop-ui .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.shop-ui select,
+.shop-ui input {
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    border-radius: 8px;
+    color: #e2e8f0;
+    padding: 10px 12px;
+    font-size: 15px;
+}
+
+.shop-ui input:focus,
+.shop-ui select:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+}
+
+.shop-ui .buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.shop-ui button {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.shop-ui button.primary {
+    background: linear-gradient(90deg, #22d3ee, #0ea5e9);
+    color: #0f172a;
+}
+
+.shop-ui button.secondary {
+    background: rgba(148, 163, 184, 0.3);
+    color: #e2e8f0;
+}
+
+.shop-ui button:active {
+    transform: scale(0.97);
+    opacity: 0.9;
+}
+
+.shop-ui .hint {
+    text-align: center;
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 8px;
+}
+
+.refine-ui .summary {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 15px;
+    color: #cbd5f5;
+}
+
+.refine-ui .items {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.refine-ui .items span {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.refine-ui .items strong {
+    font-size: 18px;
+    color: #38bdf8;
+}
+
+.refine-ui .cancel {
+    margin-top: 16px;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(248, 113, 113, 0.25);
+    color: #fecaca;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.refine-ui .cancel:active {
+    transform: scale(0.97);
+}.skill-ui {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.skill-overview {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.skill-overview .metric {
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.skill-overview .metric span {
+    font-size: 13px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.skill-overview .metric strong {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.skill-overview .metric strong.accent {
+    color: #38bdf8;
+}
+
+.skill-overview .metric strong.muted {
+    color: #cbd5f5;
+    opacity: 0.6;
+}
+
+.skill-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.skill-progress .meter {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.skill-progress .meter .fill {
+    position: absolute;
+    inset: 0;
+    width: 0%;
+    background: linear-gradient(90deg, #22d3ee, #0ea5e9);
+    transition: width 0.35s ease;
+}
+
+.skill-progress .note {
+    font-size: 14px;
+    color: #e2e8f0;
+    text-align: center;
+}
+
+.skill-ranks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.skill-rank {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.skill-rank.current {
+    border-color: rgba(56, 189, 248, 0.65);
+    box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.25);
+}
+
+.skill-rank.unlocked {
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+.skill-rank.locked {
+    opacity: 0.6;
+}
+
+.skill-rank .rank-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #e0f2fe;
+}
+
+.skill-rank .rank-range {
+    font-size: 13px;
+    color: #cbd5f5;
+}
+
+.skill-rank .rank-status {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #94a3b8;
+}
+
+.skill-rank.current .rank-status {
+    color: #38bdf8;
+}
+
+.skill-rank.unlocked .rank-status {
+    color: #60a5fa;
+}
+
+.skill-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.skill-close {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(90deg, #22d3ee, #0ea5e9);
+    color: #0f172a;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.skill-close:active {
+    transform: scale(0.97);
+}
+
+.skill-footer .hint {
+    font-size: 12px;
+    color: #94a3b8;
+}
+.reactor-gauge {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.6));
+    box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.2);
+    overflow: hidden;
+}
+
+.reactor-background {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, rgba(100, 116, 139, 0.08) 0, rgba(100, 116, 139, 0.08) 12px, transparent 12px, transparent 24px);
+}
+
+.reactor-safe-zone {
+    position: absolute;
+    top: 20%;
+    height: 60%;
+    border-radius: 8px;
+    background: linear-gradient(90deg, rgba(56, 189, 248, 0.35), rgba(59, 130, 246, 0.45));
+    border: 1px solid rgba(56, 189, 248, 0.6);
+    transition: left 0.2s ease, width 0.2s ease;
+}
+
+.reactor-pointer {
+    position: absolute;
+    bottom: 8px;
+    width: 6px;
+    height: 100px;
+    border-radius: 4px;
+    background: linear-gradient(180deg, #f97316, #fb923c);
+    box-shadow: 0 0 12px rgba(251, 146, 60, 0.65);
+    transform: translateX(-50%);
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reactor-pointer--success {
+    background: linear-gradient(180deg, #34d399, #22c55e);
+    box-shadow: 0 0 12px rgba(34, 197, 94, 0.7);
+}
+
+.reactor-pointer--fail {
+    background: linear-gradient(180deg, #f87171, #ef4444);
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.7);
+}
+
+.reactor-feedback {
+    text-align: center;
+    font-size: 15px;
+    color: #e2e8f0;
+}
+
+.reactor-meta {
+    text-align: center;
+    font-size: 13px;
+    color: #94a3b8;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+.sequence-track {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.sequence-item {
+    position: relative;
+    width: 48px;
+    height: 64px;
+    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sequence-item .sequence-key {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e2e8f0;
+    z-index: 2;
+}
+
+.sequence-item .sequence-shadow {
+    position: absolute;
+    inset: 6px;
+    border-radius: 10px;
+    background: radial-gradient(circle at top, rgba(59, 130, 246, 0.2), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.sequence-item.active {
+    transform: translateY(-6px);
+    border-color: rgba(56, 189, 248, 0.8);
+    box-shadow: 0 6px 12px rgba(56, 189, 248, 0.25);
+}
+
+.sequence-item.active .sequence-shadow {
+    opacity: 1;
+}
+
+.sequence-item.completed {
+    border-color: rgba(34, 197, 94, 0.6);
+    box-shadow: 0 4px 10px rgba(34, 197, 94, 0.2);
+}
+
+.sequence-item.completed .sequence-key {
+    color: #bbf7d0;
+}
+
+.sequence-item.shake {
+    animation: sequence-shake 0.25s ease;
+}
+
+@keyframes sequence-shake {
+    0%, 100% { transform: translateY(0); }
+    25% { transform: translateY(-4px); }
+    50% { transform: translateY(4px); }
+    75% { transform: translateY(-2px); }
+}
+
+.sequence-progress {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.2);
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.sequence-progress .fill {
+    position: absolute;
+    inset: 0;
+    width: 0%;
+    background: linear-gradient(90deg, #60a5fa, #0ea5e9);
+    transition: width 0.2s ease;
+}

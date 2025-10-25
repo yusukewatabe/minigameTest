@@ -1,0 +1,26 @@
+﻿{
+  "game": {
+    "lockpick": { "title": "Lockpick Override" },
+    "keypad": { "title": "Keypad Clearance" },
+    "safe": { "title": "Safe Dial Crack" },
+    "wire": { "title": "Breaker Panel" }
+  },
+  "status": {
+    "prepare": "ENGAGE THE DEVICE",
+    "success": "PUZZLE CLEARED",
+    "fail": "PUZZLE FAILED",
+    "focus": "FOCUS LOST - CLICK TO RESUME",
+    "resume": "RESUMED CONTROL"
+  },
+  "foot": {
+    "default": "Follow the prompts to clear the puzzle"
+  },
+  "overlay": {
+    "success": "ACCESS GRANTED",
+    "fail": "ACCESS DENIED"
+  },
+  "tier": {
+    "cheap": "CHEAP TIER",
+    "luxe": "LUXE TIER"
+  }
+}

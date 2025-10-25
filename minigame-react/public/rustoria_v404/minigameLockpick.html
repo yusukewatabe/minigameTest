@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rustoria Drug Minigame - Lockpick</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .demo-controls {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .demo-controls button {
+      padding: 8px 16px;
+      font-size: 14px;
+      border: none;
+      border-radius: 4px;
+      background: #2563eb;
+      color: #fff;
+      cursor: pointer;
+    }
+    .demo-controls button:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="app hidden"></div>
+  <div class="demo-controls">
+    <button id="restart-button">デモを再開</button>
+  </div>
+  <script type="module" src="js/app.js"></script>
+  <script type="module">
+    const baseMessage = {
+  "action": "openMinigame",
+  "kind": "lockpick",
+  "data": {
+    "difficulty": 2,
+    "seed": "drug-lockpick-demo"
+  }
+};
+    const clone = (value) => window.structuredClone ? window.structuredClone(value) : JSON.parse(JSON.stringify(value));
+    const buildMessage = () => {
+      const payload = clone(baseMessage);
+      const stamp = Date.now();
+      if (payload && typeof payload === 'object') {
+        if (payload.data && typeof payload.data === 'object') {
+          payload.data.seed = payload.data.seed ? `${payload.data.seed}-${stamp}` : `${payload.action || 'demo'}-${stamp}`;
+        }
+        if (payload.summary && typeof payload.summary === 'object') {
+          payload.summary.timestamp = stamp;
+        }
+      }
+      return payload;
+    };
+    const startDemo = () => {
+      window.postMessage(buildMessage(), '*');
+    };
+    window.addEventListener('load', () => {
+      startDemo();
+      const restart = document.getElementById('restart-button');
+      restart?.addEventListener('click', startDemo);
+    });
+  </script>
+</body>
+</html>

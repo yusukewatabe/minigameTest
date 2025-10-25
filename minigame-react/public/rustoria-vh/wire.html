@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Arecom Robbery Minigame - Wire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/games.css">
+  <style>
+    .demo-controls {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .demo-controls button {
+      padding: 8px 16px;
+      font-size: 14px;
+      border: none;
+      border-radius: 4px;
+      background: #2b6cb0;
+      color: #fff;
+      cursor: pointer;
+    }
+    .demo-controls button:hover {
+      background: #2c5282;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="app hidden">
+    <header class="hud">
+      <div class="hud-col">
+        <p class="hud-label" data-hook="tier"></p>
+        <h1 class="hud-title" data-hook="title">Standby</h1>
+      </div>
+      <div class="hud-col hud-timer">
+        <div class="timer-bar">
+          <span class="timer-fill" data-hook="timer-fill"></span>
+        </div>
+        <div class="timer-meta">
+          <span data-hook="timer-remaining">00.0</span>
+          <span class="timer-unit">s</span>
+        </div>
+      </div>
+      <div id="wireHidden" class="hud-col hud-status" data-hook="status">Awaiting input</div>
+    </header>
+    <main class="screen">
+      <div id="overlayCard" class="screen-overlay" data-hook="overlay" hidden>
+        <div class="overlay-card">
+          <p data-hook="overlay-message"></p>
+          <button type="button" class="btn btn-primary" data-hook="overlay-dismiss">Close</button>
+        </div>
+      </div>
+      <div class="game-root" data-hook="game-root"></div>
+    </main>
+    <footer class="hud-foot">
+      <div class="foot-info" data-hook="foot-info"></div>
+    </footer>
+  </div>
+  <div class="demo-controls">
+    <button id="restart-button">デモを再開</button>
+  </div>
+  <script type="module" src="js/app.js"></script>
+  <script type="module">
+    const baseMessage = {
+  "action": "minigame:start",
+  "gameId": "wire",
+  "difficulty": 1,
+  "timeLimitMs": 20000,
+  "tier": "CHEAP",
+  "seed": "wire-demo",
+  "config": {
+    "variant": "standard"
+  }
+};
+    const seedPrefix = "wire";
+    const clone = (value) => window.structuredClone ? window.structuredClone(value) : JSON.parse(JSON.stringify(value));
+    const buildMessage = () => {
+      const payload = clone(baseMessage);
+      const stamp = Date.now();
+      if (payload && typeof payload === 'object') {
+        if (typeof payload.seed === 'string') {
+          payload.seed = `${seedPrefix}-${stamp}`;
+        }
+        if (payload.config && typeof payload.config === 'object' && typeof payload.config.seed === 'string') {
+          payload.config.seed = `${seedPrefix}-${stamp}`;
+        }
+        if (payload.payload && typeof payload.payload === 'object') {
+          if (typeof payload.payload.seed === 'string') {
+            payload.payload.seed = `${seedPrefix}-${stamp}`;
+          }
+          if (payload.payload.params && typeof payload.payload.params === 'object' && typeof payload.payload.params.seed === 'string') {
+            payload.payload.params.seed = `${seedPrefix}-${stamp}`;
+          }
+        }
+      }
+      return payload;
+    };
+    const startDemo = () => {
+      window.postMessage(buildMessage(), '*');
+    };
+    window.addEventListener('load', () => {
+      startDemo();
+      const restart = document.getElementById('restart-button');
+      restart?.addEventListener('click', startDemo);
+    });
+  </script>
+</body>
+</html>
