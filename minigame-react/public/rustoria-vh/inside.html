@@ -69,19 +69,19 @@
     const baseMessage = {
   "action": "inside_open",
   "payload": {
-    "gameId": "inside",
+    "gameId": "laser-grid",
     "difficulty": "NORMAL",
     "tier": "NORMAL",
-    "seed": "inside-demo",
-    "title": "Interior Task Demo",
-    "subtitle": "準備完了、操作を開始してください",
-    "footnote": "点灯したらクリックしてください (ESC でキャンセル)",
+    "seed": "laser-grid-demo",
+    "title": "Security Map",
+    "subtitle": "侵入ミッション開始",
+    "footnote": "WASD/矢印キーで移動 | ESC でキャンセル",
     "params": {
-      "timeLimitMs": 18000
+      "timeLimitMs": 30000
     }
   }
 };
-    const seedPrefix = "inside";
+    const seedPrefix = "laser-grid";
     const clone = (value) => window.structuredClone ? window.structuredClone(value) : JSON.parse(JSON.stringify(value));
     const buildMessage = () => {
       const payload = clone(baseMessage);
